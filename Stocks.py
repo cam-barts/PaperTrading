@@ -5,6 +5,7 @@ Created on Fri Nov 17 16:36:51 2017
 @author: Cameron
 """
 import datetime as dt
+import os
 import queue
 import threading
 import time
@@ -16,7 +17,6 @@ from pandas_datareader._utils import RemoteDataError
 from requests.exceptions import ContentDecodingError
 
 from plotting import DashBoard, candle
-from investopedia import get_investopedia_position
 
 NUM_THREADS = 20
 q = queue.Queue()
@@ -101,9 +101,7 @@ def get_csv_from_ticker(ticker):
     if continuation:
         to_plot.append(ticker)
     # output
-    name = "C:\\Users\\Camer\\Desktop\\Python Practice Scripts\\Stock_Stuff\\Stocks\\" + str(
-        ticker
-    ) + ".csv"
+    name = os.path.join(os.getcwd() + './Stocks/' + str(ticker) + ".csv")
     df.to_csv(name)
 
 
